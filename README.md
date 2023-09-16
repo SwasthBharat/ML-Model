@@ -14,3 +14,4 @@ git remote add origin https://github.com/SwasthBharat/ML-Model.git
 git branch -M main
 git push -u origin main
 ```
+## Test
