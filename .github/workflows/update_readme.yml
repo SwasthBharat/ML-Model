@@ -1,0 +1,33 @@
+name: Update README
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pytz
+        env:
+          T1: ${{ secrets.T1 }}
+          T2: ${{ secrets.T2 }}
+
+      - name: Fetch commit info and update README
+        run: |
+          python .github/workflows/wflo.py
+
+        env:
+          T1: ${{ secrets.T1 }}
+          T2: ${{ secrets.T2 }}
